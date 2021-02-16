@@ -3,6 +3,7 @@ import tkinter.filedialog
 from tkinter import *
 from PIL import ImageTk,Image
 from test_read_data_to_plot_3D import read_data
+from test_Testing_3d import real_time
       
 root = tk.Tk()
 root.title("3D Map Visualiser")
@@ -18,8 +19,9 @@ def print_path():
     print(f)
     return f
 
-def real_time():
+def gui_real_time():
     print("real_time")
+    real_time()
 
 def gui_read_data():
     print("read_data")
@@ -30,7 +32,7 @@ def gui_read_data():
 ireal_time = Image.open('maxresdefault.png')
 ireal_time = ireal_time.resize((500,500))
 ireal_time = ImageTk.PhotoImage(ireal_time)
-real_time_btn = tk.Button(root,image=ireal_time,command=real_time)
+real_time_btn = tk.Button(root,image=ireal_time,command=gui_real_time)
 real_time_btn.grid(row=0,column=0,padx=50,pady=50)
 
 #image button 2
