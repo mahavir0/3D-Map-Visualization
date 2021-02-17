@@ -62,5 +62,4 @@ def read_data(input_file):
             
         plt.show()
     finally:
-        file_name.close()
-        print("file has been closed")
+        txt.close()

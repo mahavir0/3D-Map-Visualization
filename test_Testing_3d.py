@@ -2,8 +2,10 @@ from serial import Serial
 from mpl_toolkits import mplot3d
 import pkg_resources.py2_warn
 import matplotlib.pyplot as plt
+import pickle as pl
 import numpy as np
 import math
+import time
 
 def real_time():
     #initializing the 3D graph
@@ -14,11 +16,17 @@ def real_time():
     y_line = np.sin(z_line)
     ax.plot3D(x_line, y_line, z_line, 'gray')
 
+    
     #for reading the real time data from arduino
+
+    time_stamp_filename = time.strftime("%Y%m%d-%H%M%S") + ".txt"
+    model_name = time.strftime("%Y%m%d-%H%M%S") + ".svg"
+
     try:
         print("opening arduino port COM6")
         arduinoSerialData = Serial('com6',9600)
-        file = open('real_time_data_using_python_and_arduino.txt','w')
+        #time_stamp_filename = time.strftime("%Y%m%d-%H%M%S") + ".txt"
+        file = open(time_stamp_filename,'w')
 
         #for storing the values
         angles = []
@@ -64,11 +72,13 @@ def real_time():
                 if(c==180):
                     k=k+10
                     c=0
-                plt.savefig('model.svg')
+                plt.savefig(model_name)
             #ax.plot3D(x, y, z, 'ro')
             #plt.axes(projection="3d")
     
     finally:
         arduinoSerialData.close()
-        print("port has been closed")
+        print("Port has been closed")
         file.close()
+        plt.close()
+        print("Pyplot has been closed")
