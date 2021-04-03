@@ -6,6 +6,8 @@ import pickle as pl
 import numpy as np
 import math
 import time
+import os
+import os.path
 
 def real_time():
     #initializing the 3D graph
@@ -21,12 +23,14 @@ def real_time():
 
     time_stamp_filename = time.strftime("%Y%m%d-%H%M%S") + ".txt"
     model_name = time.strftime("%Y%m%d-%H%M%S") + ".svg"
+    data_file_save = os.path.join("data",time_stamp_filename)
+    model_file_save = os.path.join("model",model_name)
 
     try:
         print("opening arduino port COM6")
         arduinoSerialData = Serial('com6',9600)
         #time_stamp_filename = time.strftime("%Y%m%d-%H%M%S") + ".txt"
-        file = open(time_stamp_filename,'w')
+        file = open(data_file_save,'w')
 
         #for storing the values
         angles = []
@@ -72,7 +76,7 @@ def real_time():
                 if(c==180):
                     k=k+10
                     c=0
-                plt.savefig(model_name)
+                plt.savefig(model_file_save)
             #ax.plot3D(x, y, z, 'ro')
             #plt.axes(projection="3d")
     

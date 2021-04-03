@@ -1,6 +1,8 @@
 import tkinter as tk
 import tkinter.filedialog
 import tkinter.messagebox
+import os
+import os.path
 ###########################################################
 import serial.tools.list_ports
 ###########################################################
@@ -23,6 +25,17 @@ welcome_text = Label(root,text="Welcome")
 welcome_text.place(x=555,y=18)
 ###########################################################
 
+#make particular folder for model and data
+model_folder = "model"
+data_folder = "data"
+
+try:
+    os.makedirs(model_folder, exist_ok= True)
+    os.makedirs(data_folder, exist_ok=True)
+except OSError as e:
+    if e.errno != errno.EEXIST:
+        raise
+
 #to select file for direct mapaing of 3d map
 def print_path():
     f = tk.filedialog.askopenfilename(
@@ -43,7 +56,7 @@ def gui_read_data():
     if file_to_scan == '' :
         tk.messagebox.showwarning("Error 404","File not found\nPlease select a file to continue...!")
     else:
-        read_data(file_to_scan)
+        read_data(file_to_scan,root)
 
 def pre_check_real_time():
     print("checking arduino is connected or not")

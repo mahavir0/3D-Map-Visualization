@@ -46,16 +46,20 @@ for i in Lines:
     z.append(k)
     
     #ax.scatter3D(x_point,y_point,z_point)
-    ax.scatter3D(x_point,y_point,z_point,cmap='hsv')
-
+    ###################BEFORE
+    #ax.scatter3D(x_point,y_point,z_point,cmap='hsv')
+    ###################AFTER
+    #ax.scatter3D(x_point,y_point,z_point,color='b',marker="^")
+    ####################WIREFRAME
+    ax.plot3D(x,y,z)
     #plt.pause(0.05)
     print("X : " + str(x_point) + " Y : "+ str(y_point) + " Z : " + str(z_point))
     if(c==180):
         k=k+10
         c=0
     plt.savefig('model.svg')
-    ax.plot3D(x, y, z, 'ro')
-    plt.axes(projection="3d")
+    #ax.plot3D(x, y, z, 'ro')
+    #plt.axes(projection="3d")
     
 plt.show()
 file_name.close()
